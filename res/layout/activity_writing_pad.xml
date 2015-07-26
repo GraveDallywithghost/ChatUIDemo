@@ -6,7 +6,7 @@
 	android:background="@drawable/bg_writing"
 	>
 
-<org.crazyit.image.DrawView
+<com.newloong.writing.DrawView
     android:id="@+id/draw"
     android:layout_width="wrap_content"
     android:layout_height="427dp"

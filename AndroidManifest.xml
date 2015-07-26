@@ -213,11 +213,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
         </activity>
+        
         <!-- 画板 -->
-        <activity
-            android:name="com.newloong.writing.HandDraw"
-            android:theme="@style/horizontal_slide" >
-        </activity>
+        <activity android:name="com.newloong.writing.HandDraw"/>
         <!-- 群聊简单信息 -->
         <activity
             android:name=".activity.GroupSimpleDetailActivity"

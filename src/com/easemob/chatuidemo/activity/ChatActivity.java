@@ -94,7 +94,7 @@ import com.easemob.util.VoiceRecorder;
 import com.newloong.writing.HandDraw;
 
 /**
- * ÁÄÌìÒ³Ãæ
+ * èŠå¤©é¡µé¢
  * 
  */
 public class ChatActivity extends BaseActivity implements OnClickListener, EMEventListener{
@@ -136,7 +136,6 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	public static final int CHATTYPE_CHATROOM = 3;
 
 	public static final String COPY_IMAGE = "EASEMOBIMG";
-	private ImageView btn_writing_pad;
 	private View recordingContainer;
 	private ImageView micImage;
 	private TextView recordingHint;
@@ -148,7 +147,6 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	private View buttonPressToSpeak;
 	// private ViewPager expressionViewpager;
 	private LinearLayout emojiIconContainer;
-	
 	private LinearLayout btnContainer;
 	private ImageView locationImgview;
 	private View more;
@@ -161,7 +159,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	private int chatType;
 	private EMConversation conversation;
 	public static ChatActivity activityInstance = null;
-	// ¸øË­·¢ËÍÏûÏ¢
+	// ç»™è°å‘é€æ¶ˆæ¯
 	private String toChatUsername;
 	private VoiceRecorder voiceRecorder;
 	private MessageAdapter adapter;
@@ -185,7 +183,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	private Handler micImageHandler = new Handler() {
 		@Override
 		public void handleMessage(android.os.Message msg) {
-			// ÇĞ»»msgÇĞ»»Í¼Æ¬
+			// åˆ‡æ¢msgåˆ‡æ¢å›¾ç‰‡
 			micImage.setImageDrawable(micImages[msg.what]);
 		}
 	};
@@ -231,7 +229,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		voiceCallBtn = (ImageView) findViewById(R.id.btn_voice_call);
 		videoCallBtn = (ImageView) findViewById(R.id.btn_video_call);
 
-		// ¶¯»­×ÊÔ´ÎÄ¼ş,ÓÃÓÚÂ¼ÖÆÓïÒôÊ±
+		// åŠ¨ç”»èµ„æºæ–‡ä»¶,ç”¨äºå½•åˆ¶è¯­éŸ³æ—¶
 		micImages = new Drawable[] { getResources().getDrawable(R.drawable.record_animate_01),
 				getResources().getDrawable(R.drawable.record_animate_02),
 				getResources().getDrawable(R.drawable.record_animate_03),
@@ -247,9 +245,9 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				getResources().getDrawable(R.drawable.record_animate_13),
 				getResources().getDrawable(R.drawable.record_animate_14), };
 
-		// ±íÇélist
+		// è¡¨æƒ…list
 		reslist = getExpressionRes(35);
-		// ³õÊ¼»¯±íÇéviewpager
+		// åˆå§‹åŒ–è¡¨æƒ…viewpager
 		List<View> views = new ArrayList<View>();
 		View gv1 = getGridChildView(1);
 		View gv2 = getGridChildView(2);
@@ -283,7 +281,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				btnContainer.setVisibility(View.GONE);
 			}
 		});
-		// ¼àÌıÎÄ×Ö¿ò
+		// ç›‘å¬æ–‡å­—æ¡†
 		mEditTextContent.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -365,10 +363,10 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		wakeLock = ((PowerManager) getSystemService(Context.POWER_SERVICE)).newWakeLock(
 				PowerManager.SCREEN_DIM_WAKE_LOCK, "demo");
-		// ÅĞ¶Ïµ¥ÁÄ»¹ÊÇÈºÁÄ
+		// åˆ¤æ–­å•èŠè¿˜æ˜¯ç¾¤èŠ
 		chatType = getIntent().getIntExtra("chatType", CHATTYPE_SINGLE);
 
-		if (chatType == CHATTYPE_SINGLE) { // µ¥ÁÄ
+		if (chatType == CHATTYPE_SINGLE) { // å•èŠ
 			toChatUsername = getIntent().getStringExtra("userId");
 			Map<String,RobotUser> robotMap=((DemoHXSDKHelper)HXSDKHelper.getInstance()).getRobotList();
 			if(robotMap!=null&&robotMap.containsKey(toChatUsername)){
@@ -383,7 +381,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				((TextView) findViewById(R.id.name)).setText(toChatUsername);
 			}
 		} else {
-			// ÈºÁÄ
+			// ç¾¤èŠ
 			findViewById(R.id.container_to_group).setVisibility(View.VISIBLE);
 			findViewById(R.id.container_remove).setVisibility(View.GONE);
 			findViewById(R.id.container_voice_call).setVisibility(View.GONE);
@@ -406,7 +404,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	        // show forward message if the message is not null
 	        String forward_msg_id = getIntent().getStringExtra("forward_msg_id");
 	        if (forward_msg_id != null) {
-	            // ÏÔÊ¾·¢ËÍÒª×ª·¢µÄÏûÏ¢
+	            // æ˜¾ç¤ºå‘é€è¦è½¬å‘çš„æ¶ˆæ¯
 	            forwardMessage(forward_msg_id);
 	        }
 		}
@@ -421,11 +419,11 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	        conversation = EMChatManager.getInstance().getConversationByType(toChatUsername,EMConversationType.ChatRoom);
 	    }
 	     
-        // °Ñ´Ë»á»°µÄÎ´¶ÁÊıÖÃÎª0
+        // æŠŠæ­¤ä¼šè¯çš„æœªè¯»æ•°ç½®ä¸º0
         conversation.markAllMessagesAsRead();
 
-        // ³õÊ¼»¯dbÊ±£¬Ã¿¸öconversation¼ÓÔØÊıÄ¿ÊÇgetChatOptions().getNumberOfMessagesLoaded
-        // Õâ¸öÊıÄ¿Èç¹û±ÈÓÃ»§ÆÚÍû½øÈë»á»°½çÃæÊ±ÏÔÊ¾µÄ¸öÊı²»Ò»Ñù£¬¾Í¶à¼ÓÔØÒ»Ğ©
+        // åˆå§‹åŒ–dbæ—¶ï¼Œæ¯ä¸ªconversationåŠ è½½æ•°ç›®æ˜¯getChatOptions().getNumberOfMessagesLoaded
+        // è¿™ä¸ªæ•°ç›®å¦‚æœæ¯”ç”¨æˆ·æœŸæœ›è¿›å…¥ä¼šè¯ç•Œé¢æ—¶æ˜¾ç¤ºçš„ä¸ªæ•°ä¸ä¸€æ ·ï¼Œå°±å¤šåŠ è½½ä¸€äº›
         final List<EMMessage> msgs = conversation.getAllMessages();
         int msgCount = msgs != null ? msgs.size() : 0;
         if (msgCount < conversation.getAllMsgCount() && msgCount < pagesize) {
@@ -476,7 +474,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	
 	protected void onListViewCreation(){
         adapter = new MessageAdapter(ChatActivity.this, toChatUsername, chatType);
-        // ÏÔÊ¾ÏûÏ¢
+        // æ˜¾ç¤ºæ¶ˆæ¯
         listView.setAdapter(adapter);
         
         listView.setOnScrollListener(new ListScrollListener());
@@ -506,7 +504,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
             ((TextView) findViewById(R.id.name)).setText(toChatUsername);
         }
         
-        // ¼àÌıµ±Ç°»á»°µÄÈºÁÄ½âÉ¢±»TÊÂ¼ş
+        // ç›‘å¬å½“å‰ä¼šè¯çš„ç¾¤èŠè§£æ•£è¢«Täº‹ä»¶
         groupListener = new GroupListener();
         EMGroupManager.getInstance().addGroupChangeListener(groupListener);
 	}
@@ -566,19 +564,19 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		}
 		if (requestCode == REQUEST_CODE_CONTEXT_MENU) {
 			switch (resultCode) {
-			case RESULT_CODE_COPY: // ¸´ÖÆÏûÏ¢
+			case RESULT_CODE_COPY: // å¤åˆ¶æ¶ˆæ¯
 				EMMessage copyMsg = ((EMMessage) adapter.getItem(data.getIntExtra("position", -1)));
 				// clipboard.setText(SmileUtils.getSmiledText(ChatActivity.this,
 				// ((TextMessageBody) copyMsg.getBody()).getMessage()));
 				clipboard.setText(((TextMessageBody) copyMsg.getBody()).getMessage());
 				break;
-			case RESULT_CODE_DELETE: // É¾³ıÏûÏ¢
+			case RESULT_CODE_DELETE: // åˆ é™¤æ¶ˆæ¯
 				EMMessage deleteMsg = (EMMessage) adapter.getItem(data.getIntExtra("position", -1));
 				conversation.removeMessage(deleteMsg.getMsgId());
 				adapter.refreshSeekTo(data.getIntExtra("position", adapter.getCount()) - 1);
 				break;
 
-			case RESULT_CODE_FORWARD: // ×ª·¢ÏûÏ¢
+			case RESULT_CODE_FORWARD: // è½¬å‘æ¶ˆæ¯
 				EMMessage forwardMsg = (EMMessage) adapter.getItem(data.getIntExtra("position", 0));
 				Intent intent = new Intent(this, ForwardMessageActivity.class);
 				intent.putExtra("forward_msg_id", forwardMsg.getMsgId());
@@ -590,15 +588,15 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				break;
 			}
 		}
-		if (resultCode == RESULT_OK) { // Çå¿ÕÏûÏ¢
+		if (resultCode == RESULT_OK) { // æ¸…ç©ºæ¶ˆæ¯
 			if (requestCode == REQUEST_CODE_EMPTY_HISTORY) {
-				// Çå¿Õ»á»°
+				// æ¸…ç©ºä¼šè¯
 				EMChatManager.getInstance().clearConversation(toChatUsername);
 				adapter.refresh();
-			} else if (requestCode == REQUEST_CODE_CAMERA) { // ·¢ËÍÕÕÆ¬
+			} else if (requestCode == REQUEST_CODE_CAMERA) { // å‘é€ç…§ç‰‡
 				if (cameraFile != null && cameraFile.exists())
 					sendPicture(cameraFile.getAbsolutePath());
-			} else if (requestCode == REQUEST_CODE_SELECT_VIDEO) { // ·¢ËÍ±¾µØÑ¡ÔñµÄÊÓÆµ
+			} else if (requestCode == REQUEST_CODE_SELECT_VIDEO) { // å‘é€æœ¬åœ°é€‰æ‹©çš„è§†é¢‘
 
 				int duration = data.getIntExtra("dur", 0);
 				String videoPath = data.getStringExtra("path");
@@ -637,14 +635,14 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				}
 				sendVideo(videoPath, file.getAbsolutePath(), duration / 1000);
 
-			} else if (requestCode == REQUEST_CODE_LOCAL) { // ·¢ËÍ±¾µØÍ¼Æ¬
+			} else if (requestCode == REQUEST_CODE_LOCAL) { // å‘é€æœ¬åœ°å›¾ç‰‡
 				if (data != null) {
 					Uri selectedImage = data.getData();
 					if (selectedImage != null) {
 						sendPicByUri(selectedImage);
 					}
 				}
-			} else if (requestCode == REQUEST_CODE_SELECT_FILE) { // ·¢ËÍÑ¡ÔñµÄÎÄ¼ş
+			} else if (requestCode == REQUEST_CODE_SELECT_FILE) { // å‘é€é€‰æ‹©çš„æ–‡ä»¶
 				if (data != null) {
 					Uri uri = data.getData();
 					if (uri != null) {
@@ -652,7 +650,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 					}
 				}
 
-			} else if (requestCode == REQUEST_CODE_MAP) { // µØÍ¼
+			} else if (requestCode == REQUEST_CODE_MAP) { // åœ°å›¾
 				double latitude = data.getDoubleExtra("latitude", 0);
 				double longitude = data.getDoubleExtra("longitude", 0);
 				String locationAddress = data.getStringExtra("address");
@@ -663,22 +661,22 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 					String st = getResources().getString(R.string.unable_to_get_loaction);
 					Toast.makeText(this, st, 0).show();
 				}
-				// ÖØ·¢ÏûÏ¢
+				// é‡å‘æ¶ˆæ¯
 			} else if (requestCode == REQUEST_CODE_TEXT || requestCode == REQUEST_CODE_VOICE
 					|| requestCode == REQUEST_CODE_PICTURE || requestCode == REQUEST_CODE_LOCATION
 					|| requestCode == REQUEST_CODE_VIDEO || requestCode == REQUEST_CODE_FILE) {
 				resendMessage();
 			} else if (requestCode == REQUEST_CODE_COPY_AND_PASTE) {
-				// Õ³Ìù
+				// ç²˜è´´
 				if (!TextUtils.isEmpty(clipboard.getText())) {
 					String pasteText = clipboard.getText().toString();
 					if (pasteText.startsWith(COPY_IMAGE)) {
-						// °ÑÍ¼Æ¬Ç°×ºÈ¥µô£¬»¹Ô­³ÉÕı³£µÄpath
+						// æŠŠå›¾ç‰‡å‰ç¼€å»æ‰ï¼Œè¿˜åŸæˆæ­£å¸¸çš„path
 						sendPicture(pasteText.replace(COPY_IMAGE, ""));
 					}
 
 				}
-			} else if (requestCode == REQUEST_CODE_ADD_TO_BLACKLIST) { // ÒÆÈëºÚÃûµ¥
+			} else if (requestCode == REQUEST_CODE_ADD_TO_BLACKLIST) { // ç§»å…¥é»‘åå•
 				EMMessage deleteMsg = (EMMessage) adapter.getItem(data.getIntExtra("position", -1));
 				addUserToBlacklist(deleteMsg.getFrom());
 			} else if (conversation.getMsgCount() > 0) {
@@ -691,7 +689,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ÏûÏ¢Í¼±êµã»÷ÊÂ¼ş
+	 * æ¶ˆæ¯å›¾æ ‡ç‚¹å‡»äº‹ä»¶
 	 * 
 	 * @param view
 	 */
@@ -699,23 +697,23 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	public void onClick(View view) {
 		String st1 = getResources().getString(R.string.not_connect_to_server);
 		int id = view.getId();
-		if (id == R.id.btn_send) {// µã»÷·¢ËÍ°´Å¥(·¢ÎÄ×ÖºÍ±íÇé)
+		if (id == R.id.btn_send) {// ç‚¹å‡»å‘é€æŒ‰é’®(å‘æ–‡å­—å’Œè¡¨æƒ…)
 			String s = mEditTextContent.getText().toString();
 			sendText(s);
 		} else if (id == R.id.btn_take_picture) {
-			selectPicFromCamera();// µã»÷ÕÕÏàÍ¼±ê
+			selectPicFromCamera();// ç‚¹å‡»ç…§ç›¸å›¾æ ‡
 		} else if (id == R.id.btn_picture) {
-			selectPicFromLocal(); // µã»÷Í¼Æ¬Í¼±ê
-		} else if (id == R.id.btn_location) { // Î»ÖÃ
+			selectPicFromLocal(); // ç‚¹å‡»å›¾ç‰‡å›¾æ ‡
+		} else if (id == R.id.btn_location) { // ä½ç½®
 			startActivityForResult(new Intent(this, BaiduMapActivity.class), REQUEST_CODE_MAP);
-		} else if (id == R.id.iv_emoticons_normal) { // µã»÷ÏÔÊ¾±íÇé¿ò
+		} else if (id == R.id.iv_emoticons_normal) { // ç‚¹å‡»æ˜¾ç¤ºè¡¨æƒ…æ¡†
 			more.setVisibility(View.VISIBLE);
 			iv_emoticons_normal.setVisibility(View.INVISIBLE);
 			iv_emoticons_checked.setVisibility(View.VISIBLE);
 			btnContainer.setVisibility(View.GONE);
 			emojiIconContainer.setVisibility(View.VISIBLE);
 			hideKeyboard();
-		} else if (id == R.id.iv_emoticons_checked) { // µã»÷Òş²Ø±íÇé¿ò
+		} else if (id == R.id.iv_emoticons_checked) { // ç‚¹å‡»éšè—è¡¨æƒ…æ¡†
 			iv_emoticons_normal.setVisibility(View.VISIBLE);
 			iv_emoticons_checked.setVisibility(View.INVISIBLE);
 			btnContainer.setVisibility(View.VISIBLE);
@@ -723,12 +721,15 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 			more.setVisibility(View.GONE);
 
 		} else if (id == R.id.btn_video) {
-			// µã»÷ÉãÏñÍ¼±ê
+			// ç‚¹å‡»æ‘„åƒå›¾æ ‡
 			Intent intent = new Intent(ChatActivity.this, ImageGridActivity.class);
 			startActivityForResult(intent, REQUEST_CODE_SELECT_VIDEO);
-		} else if (id == R.id.btn_file) { // µã»÷ÎÄ¼şÍ¼±ê
+		} else if (id == R.id.btn_file) { // ç‚¹å‡»æ–‡ä»¶å›¾æ ‡
 			selectFileFromLocal();
-		} else if (id == R.id.btn_voice_call) { // µã»÷ÓïÒôµç»°Í¼±ê
+		} else if (id == R.id.btn_writing_pad) { // ç‚¹å‡»æ‰‹å†™æ¿å›¾æ ‡
+		    Intent intent = new Intent(ChatActivity.this, HandDraw.class);
+            startActivity(intent);
+		} else if (id == R.id.btn_voice_call) { // ç‚¹å‡»è¯­éŸ³ç”µè¯å›¾æ ‡
 			if (!EMChatManager.getInstance().isConnected())
 				Toast.makeText(this, st1, 0).show();
 			else{
@@ -737,7 +738,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				voiceCallBtn.setEnabled(false);
 				toggleMore(null);
 			}
-		} else if (id == R.id.btn_video_call) { // ÊÓÆµÍ¨»°
+		} else if (id == R.id.btn_video_call) { // è§†é¢‘é€šè¯
 			if (!EMChatManager.getInstance().isConnected())
 				Toast.makeText(this, st1, 0).show();
 			else{
@@ -746,17 +747,11 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				videoCallBtn.setEnabled(false);
 				toggleMore(null);
 			}
-		}else if (id == R.id.btn_writing_pad) { // µ÷³ö»­°å
-            
-            {
-               Intent intent = new Intent(ChatActivity.this, HandDraw.class);
-            }
-        }
-		
+		}
 	}
 
 	/**
-	 * ÊÂ¼ş¼àÌı
+	 * äº‹ä»¶ç›‘å¬
 	 * 
 	 * see {@link EMNotifierEvent}
      */
@@ -765,26 +760,26 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
         switch (event.getEvent()) {
         case EventNewMessage:
         {
-            //»ñÈ¡µ½message
+            //è·å–åˆ°message
             EMMessage message = (EMMessage) event.getData();
             
             String username = null;
-            //Èº×éÏûÏ¢
+            //ç¾¤ç»„æ¶ˆæ¯
             if(message.getChatType() == ChatType.GroupChat || message.getChatType() == ChatType.ChatRoom){
                 username = message.getTo();
             }
             else{
-                //µ¥ÁÄÏûÏ¢
+                //å•èŠæ¶ˆæ¯
                 username = message.getFrom();
             }
 
-            //Èç¹ûÊÇµ±Ç°»á»°µÄÏûÏ¢£¬Ë¢ĞÂÁÄÌìÒ³Ãæ
+            //å¦‚æœæ˜¯å½“å‰ä¼šè¯çš„æ¶ˆæ¯ï¼Œåˆ·æ–°èŠå¤©é¡µé¢
             if(username.equals(getToChatUsername())){
                 refreshUIWithNewMessage();
-                //ÉùÒôºÍÕğ¶¯ÌáÊ¾ÓĞĞÂÏûÏ¢
+                //å£°éŸ³å’Œéœ‡åŠ¨æç¤ºæœ‰æ–°æ¶ˆæ¯
                 HXSDKHelper.getInstance().getNotifier().viberateAndPlayTone(message);
             }else{
-                //Èç¹ûÏûÏ¢²»ÊÇºÍµ±Ç°ÁÄÌìIDµÄÏûÏ¢
+                //å¦‚æœæ¶ˆæ¯ä¸æ˜¯å’Œå½“å‰èŠå¤©IDçš„æ¶ˆæ¯
                 HXSDKHelper.getInstance().getNotifier().onNewMsg(message);
             }
 
@@ -792,14 +787,14 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
         }
         case EventDeliveryAck:
         {
-            //»ñÈ¡µ½message
+            //è·å–åˆ°message
             EMMessage message = (EMMessage) event.getData();
             refreshUI();
             break;
         }
         case EventReadAck:
         {
-            //»ñÈ¡µ½message
+            //è·å–åˆ°message
             EMMessage message = (EMMessage) event.getData();
             refreshUI();
             break;
@@ -843,7 +838,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ÕÕÏà»ñÈ¡Í¼Æ¬
+	 * ç…§ç›¸è·å–å›¾ç‰‡
 	 */
 	public void selectPicFromCamera() {
 		if (!CommonUtils.isExitsSdcard()) {
@@ -861,7 +856,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * Ñ¡ÔñÎÄ¼ş
+	 * é€‰æ‹©æ–‡ä»¶
 	 */
 	private void selectFileFromLocal() {
 		Intent intent = null;
@@ -877,7 +872,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ´ÓÍ¼¿â»ñÈ¡Í¼Æ¬
+	 * ä»å›¾åº“è·å–å›¾ç‰‡
 	 */
 	public void selectPicFromLocal() {
 		Intent intent;
@@ -892,7 +887,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ·¢ËÍÎÄ±¾ÏûÏ¢
+	 * å‘é€æ–‡æœ¬æ¶ˆæ¯
 	 * 
 	 * @param content
 	 *            message content
@@ -903,7 +898,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 
 		if (content.length() > 0) {
 			EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
-			// Èç¹ûÊÇÈºÁÄ£¬ÉèÖÃchattype,Ä¬ÈÏÊÇµ¥ÁÄ
+			// å¦‚æœæ˜¯ç¾¤èŠï¼Œè®¾ç½®chattype,é»˜è®¤æ˜¯å•èŠ
 			if (chatType == CHATTYPE_GROUP){
 			    message.setChatType(ChatType.GroupChat);
 			}else if(chatType == CHATTYPE_CHATROOM){
@@ -913,13 +908,13 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				message.setAttribute("em_robot_message", true);
 			}
 			TextMessageBody txtBody = new TextMessageBody(content);
-			// ÉèÖÃÏûÏ¢body
+			// è®¾ç½®æ¶ˆæ¯body
 			message.addBody(txtBody);
-			// ÉèÖÃÒª·¢¸øË­,ÓÃ»§username»òÕßÈºÁÄgroupid
+			// è®¾ç½®è¦å‘ç»™è°,ç”¨æˆ·usernameæˆ–è€…ç¾¤èŠgroupid
 			message.setReceipt(toChatUsername);
-			// °Ñmessgage¼Óµ½conversationÖĞ
+			// æŠŠmessgageåŠ åˆ°conversationä¸­
 			conversation.addMessage(message);
-			// Í¨ÖªadapterÓĞÏûÏ¢±ä¶¯£¬adapter»á¸ù¾İ¼ÓÈëµÄÕâÌõmessageÏÔÊ¾ÏûÏ¢ºÍµ÷ÓÃsdkµÄ·¢ËÍ·½·¨
+			// é€šçŸ¥adapteræœ‰æ¶ˆæ¯å˜åŠ¨ï¼Œadapterä¼šæ ¹æ®åŠ å…¥çš„è¿™æ¡messageæ˜¾ç¤ºæ¶ˆæ¯å’Œè°ƒç”¨sdkçš„å‘é€æ–¹æ³•
 			adapter.refreshSelectLast();
 			mEditTextContent.setText("");
 
@@ -929,7 +924,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ·¢ËÍÓïÒô
+	 * å‘é€è¯­éŸ³
 	 * 
 	 * @param filePath
 	 * @param fileName
@@ -942,7 +937,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		}
 		try {
 			final EMMessage message = EMMessage.createSendMessage(EMMessage.Type.VOICE);
-			// Èç¹ûÊÇÈºÁÄ£¬ÉèÖÃchattype,Ä¬ÈÏÊÇµ¥ÁÄ
+			// å¦‚æœæ˜¯ç¾¤èŠï¼Œè®¾ç½®chattype,é»˜è®¤æ˜¯å•èŠ
 			if (chatType == CHATTYPE_GROUP){
 				message.setChatType(ChatType.GroupChat);
 				}else if(chatType == CHATTYPE_CHATROOM){
@@ -966,7 +961,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ·¢ËÍÍ¼Æ¬
+	 * å‘é€å›¾ç‰‡
 	 * 
 	 * @param filePath
 	 */
@@ -974,7 +969,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		String to = toChatUsername;
 		// create and add image message in view
 		final EMMessage message = EMMessage.createSendMessage(EMMessage.Type.IMAGE);
-		// Èç¹ûÊÇÈºÁÄ£¬ÉèÖÃchattype,Ä¬ÈÏÊÇµ¥ÁÄ
+		// å¦‚æœæ˜¯ç¾¤èŠï¼Œè®¾ç½®chattype,é»˜è®¤æ˜¯å•èŠ
 		if (chatType == CHATTYPE_GROUP){
 			message.setChatType(ChatType.GroupChat);
 		}else if(chatType == CHATTYPE_CHATROOM){
@@ -983,7 +978,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 
 		message.setReceipt(to);
 		ImageMessageBody body = new ImageMessageBody(new File(filePath));
-		// Ä¬ÈÏ³¬¹ı100kµÄÍ¼Æ¬»áÑ¹Ëõºó·¢¸ø¶Ô·½£¬¿ÉÒÔÉèÖÃ³É·¢ËÍÔ­Í¼
+		// é»˜è®¤è¶…è¿‡100kçš„å›¾ç‰‡ä¼šå‹ç¼©åå‘ç»™å¯¹æ–¹ï¼Œå¯ä»¥è®¾ç½®æˆå‘é€åŸå›¾
 		// body.setSendOriginalImage(true);
 		message.addBody(body);
 		if(isRobot){
@@ -998,7 +993,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ·¢ËÍÊÓÆµÏûÏ¢
+	 * å‘é€è§†é¢‘æ¶ˆæ¯
 	 */
 	private void sendVideo(final String filePath, final String thumbPath, final int length) {
 		final File videoFile = new File(filePath);
@@ -1007,7 +1002,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		}
 		try {
 			EMMessage message = EMMessage.createSendMessage(EMMessage.Type.VIDEO);
-			// Èç¹ûÊÇÈºÁÄ£¬ÉèÖÃchattype,Ä¬ÈÏÊÇµ¥ÁÄ
+			// å¦‚æœæ˜¯ç¾¤èŠï¼Œè®¾ç½®chattype,é»˜è®¤æ˜¯å•èŠ
 			if (chatType == CHATTYPE_GROUP){
 				message.setChatType(ChatType.GroupChat);
 			}else if(chatType == CHATTYPE_CHATROOM){
@@ -1031,7 +1026,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ¸ù¾İÍ¼¿âÍ¼Æ¬uri·¢ËÍÍ¼Æ¬
+	 * æ ¹æ®å›¾åº“å›¾ç‰‡uriå‘é€å›¾ç‰‡
 	 * 
 	 * @param selectedImage
 	 */
@@ -1068,7 +1063,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ·¢ËÍÎ»ÖÃĞÅÏ¢
+	 * å‘é€ä½ç½®ä¿¡æ¯
 	 * 
 	 * @param latitude
 	 * @param longitude
@@ -1077,7 +1072,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	 */
 	private void sendLocationMsg(double latitude, double longitude, String imagePath, String locationAddress) {
 		EMMessage message = EMMessage.createSendMessage(EMMessage.Type.LOCATION);
-		// Èç¹ûÊÇÈºÁÄ£¬ÉèÖÃchattype,Ä¬ÈÏÊÇµ¥ÁÄ
+		// å¦‚æœæ˜¯ç¾¤èŠï¼Œè®¾ç½®chattype,é»˜è®¤æ˜¯å•èŠ
 		if (chatType == CHATTYPE_GROUP){
 			message.setChatType(ChatType.GroupChat);
 		}else if(chatType == CHATTYPE_CHATROOM){
@@ -1097,7 +1092,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ·¢ËÍÎÄ¼ş
+	 * å‘é€æ–‡ä»¶
 	 * 
 	 * @param uri
 	 */
@@ -1131,9 +1126,9 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 			return;
 		}
 
-		// ´´½¨Ò»¸öÎÄ¼şÏûÏ¢
+		// åˆ›å»ºä¸€ä¸ªæ–‡ä»¶æ¶ˆæ¯
 		EMMessage message = EMMessage.createSendMessage(EMMessage.Type.FILE);
-		// Èç¹ûÊÇÈºÁÄ£¬ÉèÖÃchattype,Ä¬ÈÏÊÇµ¥ÁÄ
+		// å¦‚æœæ˜¯ç¾¤èŠï¼Œè®¾ç½®chattype,é»˜è®¤æ˜¯å•èŠ
 		if (chatType == CHATTYPE_GROUP){
 			message.setChatType(ChatType.GroupChat);
 		}else if(chatType == CHATTYPE_CHATROOM){
@@ -1154,7 +1149,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ÖØ·¢ÏûÏ¢
+	 * é‡å‘æ¶ˆæ¯
 	 */
 	private void resendMessage() {
 		EMMessage msg = null;
@@ -1166,7 +1161,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ÏÔÊ¾ÓïÒôÍ¼±ê°´Å¥
+	 * æ˜¾ç¤ºè¯­éŸ³å›¾æ ‡æŒ‰é’®
 	 * 
 	 * @param view
 	 */
@@ -1187,7 +1182,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ÏÔÊ¾¼üÅÌÍ¼±ê
+	 * æ˜¾ç¤ºé”®ç›˜å›¾æ ‡
 	 * 
 	 * @param view
 	 */
@@ -1220,7 +1215,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * µã»÷Çå¿ÕÁÄÌì¼ÇÂ¼
+	 * ç‚¹å‡»æ¸…ç©ºèŠå¤©è®°å½•
 	 * 
 	 * @param view
 	 */
@@ -1231,7 +1226,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * µã»÷½øÈëÈº×éÏêÇé
+	 * ç‚¹å‡»è¿›å…¥ç¾¤ç»„è¯¦æƒ…
 	 * 
 	 * @param view
 	 */
@@ -1250,7 +1245,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ÏÔÊ¾»òÒş²ØÍ¼±ê°´Å¥Ò³
+	 * æ˜¾ç¤ºæˆ–éšè—å›¾æ ‡æŒ‰é’®é¡µ
 	 * 
 	 * @param view
 	 */
@@ -1276,7 +1271,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * µã»÷ÎÄ×ÖÊäÈë¿ò
+	 * ç‚¹å‡»æ–‡å­—è¾“å…¥æ¡†
 	 * 
 	 * @param v
 	 */
@@ -1295,7 +1290,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
     private ImageView videoCallBtn;
 
 	/**
-	 * °´×¡Ëµ»°listener
+	 * æŒ‰ä½è¯´è¯listener
 	 * 
 	 */
 	class PressToSpeakListen implements View.OnTouchListener {
@@ -1381,7 +1376,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * »ñÈ¡±íÇéµÄgridviewµÄ×Óview
+	 * è·å–è¡¨æƒ…çš„gridviewçš„å­view
 	 * 
 	 * @param i
 	 * @return
@@ -1405,24 +1400,24 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				String filename = expressionAdapter.getItem(position);
 				try {
-					// ÎÄ×ÖÊäÈë¿ò¿É¼ûÊ±£¬²Å¿ÉÊäÈë±íÇé
-					// °´×¡Ëµ»°¿É¼û£¬²»ÈÃÊäÈë±íÇé
+					// æ–‡å­—è¾“å…¥æ¡†å¯è§æ—¶ï¼Œæ‰å¯è¾“å…¥è¡¨æƒ…
+					// æŒ‰ä½è¯´è¯å¯è§ï¼Œä¸è®©è¾“å…¥è¡¨æƒ…
 					if (buttonSetModeKeyboard.getVisibility() != View.VISIBLE) {
 
-						if (filename != "delete_expression") { // ²»ÊÇÉ¾³ı¼ü£¬ÏÔÊ¾±íÇé
-							// ÕâÀïÓÃµÄ·´Éä£¬ËùÒÔ»ìÏıµÄÊ±ºò²»Òª»ìÏıSmileUtilsÕâ¸öÀà
+						if (filename != "delete_expression") { // ä¸æ˜¯åˆ é™¤é”®ï¼Œæ˜¾ç¤ºè¡¨æƒ…
+							// è¿™é‡Œç”¨çš„åå°„ï¼Œæ‰€ä»¥æ··æ·†çš„æ—¶å€™ä¸è¦æ··æ·†SmileUtilsè¿™ä¸ªç±»
 							Class clz = Class.forName("com.easemob.chatuidemo.utils.SmileUtils");
 							Field field = clz.getField(filename);
 							mEditTextContent.append(SmileUtils.getSmiledText(ChatActivity.this,
 									(String) field.get(null)));
-						} else { // É¾³ıÎÄ×Ö»òÕß±íÇé
+						} else { // åˆ é™¤æ–‡å­—æˆ–è€…è¡¨æƒ…
 							if (!TextUtils.isEmpty(mEditTextContent.getText())) {
 
-								int selectionStart = mEditTextContent.getSelectionStart();// »ñÈ¡¹â±êµÄÎ»ÖÃ
+								int selectionStart = mEditTextContent.getSelectionStart();// è·å–å…‰æ ‡çš„ä½ç½®
 								if (selectionStart > 0) {
 									String body = mEditTextContent.getText().toString();
 									String tempStr = body.substring(0, selectionStart);
-									int i = tempStr.lastIndexOf("[");// »ñÈ¡×îºóÒ»¸ö±íÇéµÄÎ»ÖÃ
+									int i = tempStr.lastIndexOf("[");// è·å–æœ€åä¸€ä¸ªè¡¨æƒ…çš„ä½ç½®
 									if (i != -1) {
 										CharSequence cs = tempStr.substring(i, selectionStart);
 										if (SmileUtils.containsKey(cs.toString()))
@@ -1496,7 +1491,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 
 		DemoHXSDKHelper sdkHelper = (DemoHXSDKHelper) DemoHXSDKHelper.getInstance();
 
-		// °Ñ´Ëactivity ´Óforeground activity ÁĞ±íÀïÒÆ³ı
+		// æŠŠæ­¤activity ä»foreground activity åˆ—è¡¨é‡Œç§»é™¤
 		sdkHelper.popActivity(this);
 		
 		super.onStop();
@@ -1508,12 +1503,12 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		if (wakeLock.isHeld())
 			wakeLock.release();
 		if (VoicePlayClickListener.isPlaying && VoicePlayClickListener.currentPlayListener != null) {
-			// Í£Ö¹ÓïÒô²¥·Å
+			// åœæ­¢è¯­éŸ³æ’­æ”¾
 			VoicePlayClickListener.currentPlayListener.stopPlayVoice();
 		}
 
 		try {
-			// Í£Ö¹Â¼Òô
+			// åœæ­¢å½•éŸ³
 			if (voiceRecorder.isRecording()) {
 				voiceRecorder.discardRecording();
 				recordingContainer.setVisibility(View.INVISIBLE);
@@ -1523,7 +1518,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * Òş²ØÈí¼üÅÌ
+	 * éšè—è½¯é”®ç›˜
 	 */
 	private void hideKeyboard() {
 		if (getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
@@ -1533,7 +1528,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ¼ÓÈëµ½ºÚÃûµ¥
+	 * åŠ å…¥åˆ°é»‘åå•
 	 * 
 	 * @param username
 	 */
@@ -1566,7 +1561,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ·µ»Ø
+	 * è¿”å›
 	 * 
 	 * @param view
 	 */
@@ -1579,7 +1574,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ¸²¸ÇÊÖ»ú·µ»Ø¼ü
+	 * è¦†ç›–æ‰‹æœºè¿”å›é”®
 	 */
 	@Override
 	public void onBackPressed() {
@@ -1596,7 +1591,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * listview»¬¶¯¼àÌılistener
+	 * listviewæ»‘åŠ¨ç›‘å¬listener
 	 * 
 	 */
 	private class ListScrollListener implements OnScrollListener {
@@ -1608,12 +1603,12 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				/*if (view.getFirstVisiblePosition() == 0 && !isloading && haveMoreData && conversation.getAllMessages().size() != 0) {
 					isloading = true;
 					loadmorePB.setVisibility(View.VISIBLE);
-					// sdk³õÊ¼»¯¼ÓÔØµÄÁÄÌì¼ÇÂ¼Îª20Ìõ£¬µ½¶¥Ê±È¥dbÀï»ñÈ¡¸ü¶à					
+					// sdkåˆå§‹åŒ–åŠ è½½çš„èŠå¤©è®°å½•ä¸º20æ¡ï¼Œåˆ°é¡¶æ—¶å»dbé‡Œè·å–æ›´å¤š					
 					List<EMMessage> messages;
 					EMMessage firstMsg = conversation.getAllMessages().get(0);
 					try {
-						// »ñÈ¡¸ü¶àmessges£¬µ÷ÓÃ´Ë·½·¨µÄÊ±ºò´Ódb»ñÈ¡µÄmessages
-						// sdk»á×Ô¶¯´æÈëµ½´ËconversationÖĞ
+						// è·å–æ›´å¤šmessgesï¼Œè°ƒç”¨æ­¤æ–¹æ³•çš„æ—¶å€™ä»dbè·å–çš„messages
+						// sdkä¼šè‡ªåŠ¨å­˜å…¥åˆ°æ­¤conversationä¸­
 						if (chatType == CHATTYPE_SINGLE)
 							messages = conversation.loadMoreMsgFromDB(firstMsg.getMsgId(), pagesize);
 						else
@@ -1627,7 +1622,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 					} catch (InterruptedException e) {
 					}
 					if (messages.size() != 0) {
-						// Ë¢ĞÂui
+						// åˆ·æ–°ui
 						if (messages.size() > 0) {
 							adapter.refreshSeekTo(messages.size() - 1);
 						}
@@ -1654,7 +1649,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 
 	@Override
 	protected void onNewIntent(Intent intent) {
-		// µã»÷notification bar½øÈëÁÄÌìÒ³Ãæ£¬±£Ö¤Ö»ÓĞÒ»¸öÁÄÌìÒ³Ãæ
+		// ç‚¹å‡»notification barè¿›å…¥èŠå¤©é¡µé¢ï¼Œä¿è¯åªæœ‰ä¸€ä¸ªèŠå¤©é¡µé¢
 		String username = intent.getStringExtra("userId");
 		if (toChatUsername.equals(username))
 			super.onNewIntent(intent);
@@ -1666,7 +1661,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 
 	/**
-	 * ×ª·¢ÏûÏ¢
+	 * è½¬å‘æ¶ˆæ¯
 	 * 
 	 * @param forward_msg_id
 	 */
@@ -1675,17 +1670,17 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		EMMessage.Type type = forward_msg.getType();
 		switch (type) {
 		case TXT:
-			// »ñÈ¡ÏûÏ¢ÄÚÈİ£¬·¢ËÍÏûÏ¢
+			// è·å–æ¶ˆæ¯å†…å®¹ï¼Œå‘é€æ¶ˆæ¯
 			String content = ((TextMessageBody) forward_msg.getBody()).getMessage();
 			sendText(content);
 			break;
 		case IMAGE:
-			// ·¢ËÍÍ¼Æ¬
+			// å‘é€å›¾ç‰‡
 			String filePath = ((ImageMessageBody) forward_msg.getBody()).getLocalUrl();
 			if (filePath != null) {
 				File file = new File(filePath);
 				if (!file.exists()) {
-					// ²»´æÔÚ´óÍ¼·¢ËÍËõÂÔÍ¼
+					// ä¸å­˜åœ¨å¤§å›¾å‘é€ç¼©ç•¥å›¾
 					filePath = ImageUtils.getThumbnailImagePath(filePath);
 				}
 				sendPicture(filePath);
@@ -1701,7 +1696,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	}
 	
 	/**
-	 * ¼à²âÈº×é½âÉ¢»òÕß±»TÊÂ¼ş
+	 * ç›‘æµ‹ç¾¤ç»„è§£æ•£æˆ–è€…è¢«Täº‹ä»¶
 	 * 
 	 */
 	class GroupListener extends GroupRemoveListener{
@@ -1724,7 +1719,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 
 		@Override
 		public void onGroupDestroy(final String groupId, String groupName) {
-			// Èº×é½âÉ¢ÕıºÃÔÚ´ËÒ³Ãæ£¬ÌáÊ¾Èº×é±»½âÉ¢£¬²¢finish´ËÒ³Ãæ
+			// ç¾¤ç»„è§£æ•£æ­£å¥½åœ¨æ­¤é¡µé¢ï¼Œæç¤ºç¾¤ç»„è¢«è§£æ•£ï¼Œå¹¶finishæ­¤é¡µé¢
 			runOnUiThread(new Runnable() {
 				String st14 = getResources().getString(R.string.the_current_group);
 

@@ -25,20 +25,20 @@ public class HandDraw extends Activity
 		blur = new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL);
 	}
 	@Override
-	//璐熻矗鍒涘缓閫夐」鑿滃崟
+	//负责创建选项菜单
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		MenuInflater inflator = new MenuInflater(this);
-		//瑁呰浇R.menu.my_menu瀵瑰簲鐨勮彍鍗曪紝骞舵坊鍔犲埌menu涓�
+		//装载R.menu.my_menu对应的菜单，并添加到menu中
 		inflator.inflate(R.menu.my_menu, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 	@Override
-	// 鑿滃崟椤硅鍗曞嚮鍚庣殑鍥炶皟鏂规硶
+	// 菜单项被单击后的回调方法
 	public boolean onOptionsItemSelected(MenuItem mi)
 	{
 		DrawView dv = (DrawView)findViewById(R.id.draw);
-		//鍒ゆ柇鍗曞嚮鐨勬槸鍝釜鑿滃崟椤癸紝骞堕拡瀵规�х殑浣滃嚭鍝嶅簲銆�
+		//判断单击的是哪个菜单项，并针对性的作出响应。
 		switch (mi.getItemId())
 		{
 			case R.id.red:
