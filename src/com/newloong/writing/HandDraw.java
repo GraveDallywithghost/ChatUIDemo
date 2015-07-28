@@ -42,6 +42,7 @@ public class HandDraw extends Activity implements OnClickListener {
 	Button  btnSize	 = null;//大小
 	Button  btnShape = null;//形状
 	Button  btnSave  = null;//保存
+	Button  btnSend  = null;//发送
 	
 	//颜色
 	ImageView imgColorBlack  = null;
@@ -85,6 +86,7 @@ public class HandDraw extends Activity implements OnClickListener {
 		btnSize		= (Button) findViewById(R.id.btnSize);
 		btnShape	= (Button) findViewById(R.id.btnShape);
 		btnSave     = (Button) findViewById(R.id.btnSave);
+		btnSend     = (Button) findViewById(R.id.btnSend);
 		btnSetting.setOnClickListener(this);
 		btnEraser.setOnClickListener(this);
 		btnUndo.setOnClickListener(this);
@@ -93,6 +95,7 @@ public class HandDraw extends Activity implements OnClickListener {
 		btnSize.setOnClickListener(this);
 		btnShape.setOnClickListener(this);
 		btnSave.setOnClickListener(this);
+		btnSend.setOnClickListener(this);
 		
 		imgColorBlack  = (ImageView) findViewById(R.id.imgColorBlack);
 		imgColorBlue   = (ImageView) findViewById(R.id.imgColorBlue);
@@ -188,6 +191,8 @@ public class HandDraw extends Activity implements OnClickListener {
 			break;
 		case R.id.btnSave://保存
 			savePic();
+		case R.id.btnSend://发送
+            sendPic();
 		
 		//颜色
 		case R.id.imgColorBlack:
@@ -234,7 +239,7 @@ public class HandDraw extends Activity implements OnClickListener {
 	}
 
 	
-	//显示 "设置"-形状
+    //显示 "设置"-形状
 	private void showSettingShapeView() {
 		layoutShape.setVisibility(View.VISIBLE);
 		layoutSize.setVisibility(View.GONE);
@@ -289,6 +294,13 @@ public class HandDraw extends Activity implements OnClickListener {
 		
 		Toast.makeText(getApplicationContext(), "已保存", 0).show();
 	}
+	
+	//发送保存过的图片
+    private void sendPic() {
+        // TODO Auto-generated method stub
+        Toast.makeText(getApplicationContext(), "请到聊天界面发送保存后的图片", 0).show();
+    }
+
 	
 	
 }

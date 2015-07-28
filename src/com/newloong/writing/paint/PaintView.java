@@ -26,7 +26,7 @@ public class PaintView extends View implements UndoCommand {
 	private Canvas mCanvas = null;
 	private ToolInterface mCurrentPainter = null;
 
-	/* Bitmap ������ */
+
 	private Bitmap mBitmap = null;
 	private Bitmap mOrgBitMap = null;
 
@@ -34,7 +34,7 @@ public class PaintView extends View implements UndoCommand {
 	private int mBitmapHeight = 0;
 
 	private int mBackGroundColor = DEFAULT.BACKGROUND_COLOR;
-	/* paint ������ */
+
 	private Paint mBitmapPaint = null;
 
 	private paintPadUndoStack mUndoStack = null;
@@ -51,7 +51,7 @@ public class PaintView extends View implements UndoCommand {
 	private ShapesInterface mCurrentShape = null;
 	private Paint.Style mStyle = Paint.Style.STROKE;
 
-	/* ���� ������ */
+
 	private boolean isTouchUp = false;
 	private int mStackedSize = PaintConstants.UNDO_STACK_SIZE;
 
@@ -69,9 +69,8 @@ public class PaintView extends View implements UndoCommand {
 		init();
 	}
 
-	/**
-	 * ��ʼ��
-	 */
+	
+	
 	private void init() {
 		mCanvas = new Canvas();
 		mBitmapPaint = new Paint(Paint.DITHER_FLAG);
@@ -81,9 +80,7 @@ public class PaintView extends View implements UndoCommand {
 		creatNewPen();
 	}
 
-	/**
-	 * �ص��������onHasDraw����
-	 */
+	
 	public void setCallBack(PaintViewCallBack callBack) {
 		mCallBack = callBack;
 	}
@@ -113,12 +110,12 @@ public class PaintView extends View implements UndoCommand {
 			if (mCurrentPainter.hasDraw()) {
 				mUndoStack.push(mCurrentPainter);
 				if (mCallBack != null) {
-					// ����undo\redo����ʵ
+					
 					mCallBack.onHasDraw();
 				}
 			}
 			mCurrentPainter.touchUp(x, y);
-			// ֻ����up��ʱ�����bitmap�ϻ�ͼ��������ʾ��view��
+			
 			mCurrentPainter.draw(mCanvas);
 			invalidate();
 			isTouchUp = true;
@@ -128,7 +125,7 @@ public class PaintView extends View implements UndoCommand {
 	}
 
 	/**
-	 * ���þ�����״����Ҫע����ǹ��캯���е�Painter���������ʳ�¯��
+	 * 
 	 */
 	private void setShape() {
 		if (mCurrentPainter instanceof Shapable) {
@@ -161,12 +158,12 @@ public class PaintView extends View implements UndoCommand {
 	@Override
 	public void onDraw(Canvas cv) {
 		cv.drawColor(mBackGroundColor);
-		// ���ⲿ���Ƶķ���ֻ��һ�֣���������bitmap�ϻ��ƣ�Ȼ����ص�cv
+		// 
 		cv.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
-		// TouchUpʹ��BitMap��canvas���л��ƣ�Ҳ�Ͳ�����View�ϻ�����
+		// 
 		if (!isTouchUp) {
-			// ƽʱ��ֻ��view��cv����ʱ����
-			// earaser������cv�ϻ��ƣ���Ҫֱ�ӻ�����bitmap��
+			// 
+			// 
 			if (mPaintType != PEN_TYPE.ERASER) {
 				mCurrentPainter.draw(cv);
 			}
@@ -174,7 +171,7 @@ public class PaintView extends View implements UndoCommand {
 	}
 
 	/**
-	 * ����һ���µĻ���
+	 * 
 	 */
 	void creatNewPen() {
 		ToolInterface tool = null;
@@ -199,7 +196,7 @@ public class PaintView extends View implements UndoCommand {
 	}
 
 	/**
-	 * �����¼�����ʱ������Bitmap��setCanvas
+	 * 
 	 */
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -213,7 +210,7 @@ public class PaintView extends View implements UndoCommand {
 	}
 
 	/**
-	 * ���������ϵı���ͼƬ��ͬʱ���б���
+	 * 
 	 */
 	public void setForeBitMap(Bitmap bitmap) {
 		if (bitmap != null) {
@@ -230,7 +227,7 @@ public class PaintView extends View implements UndoCommand {
 	}
 
 	/**
-	 * ����ԭʼͼƬ
+	 *
 	 */
 	private void recycleOrgBitmap() {
 		if (mOrgBitMap != null && !mOrgBitMap.isRecycled()) {
@@ -240,7 +237,7 @@ public class PaintView extends View implements UndoCommand {
 	}
 
 	/**
-	 * ����ͼƬ
+	 * 
 	 */
 	private void recycleMBitmap() {
 		if (mBitmap != null && !mBitmap.isRecycled()) {
@@ -250,10 +247,10 @@ public class PaintView extends View implements UndoCommand {
 	}
 
 	/**
-	 * �õ���ǰview�Ľ�ͼ
+	 * 
 	 */
 	public Bitmap getSnapShoot() {
-		// ��õ�ǰ��view��ͼƬ
+		// 
 		setDrawingCacheEnabled(true);
 		buildDrawingCache(true);
 		Bitmap bitmap = getDrawingCache(true);
@@ -262,13 +259,13 @@ public class PaintView extends View implements UndoCommand {
 			bitmap.recycle();
 			bitmap = null;
 		}
-		// �����������
+		//
 		setDrawingCacheEnabled(false);
 		return bmp;
 	}
 
 	/**
-	 * �����Ļ
+	 * 
 	 */
 	public void clearAll() {
 		recycleMBitmap();
@@ -279,7 +276,7 @@ public class PaintView extends View implements UndoCommand {
 	}
 
 	/**
-	 * ����bitMapͬʱ�����canvas
+	 * 
 	 */
 	private void creatCanvasBitmap(int w, int h) {
 		mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
@@ -287,7 +284,7 @@ public class PaintView extends View implements UndoCommand {
 	}
 
 	/**
-	 * �ı䵱ǰ���ʵ�����
+	 * 
 	 */
 	public void setCurrentPainterType(int type) {
 		switch (type) {
@@ -304,7 +301,7 @@ public class PaintView extends View implements UndoCommand {
 	}
 
 	/**
-	 * �ı䵱ǰ��Shap
+	 * 
 	 */
 	public void setCurrentShapType(int type) {
 		switch (type) {
@@ -323,36 +320,34 @@ public class PaintView extends View implements UndoCommand {
 	}
 
 	/**
-	 * �õ���ǰ���ʵ�����
+	 * 
 	 */
 	public int getCurrentPainter() {
 		return mPaintType;
 	}
 
 	/**
-	 * �ı䵱ǰ���ʵĴ�С
+	 * 
 	 */
 	public void setPenSize(int size) {
 		mPenSize = size;
 	}
 
 	/**
-	 * �ı䵱ǰEraser�Ĵ�С
+	 * 
 	 */
 	public void setEraserSize(int size) {
 		mEraserSize = size;
 	}
 
 	/**
-	 * �õ���ǰ���ʵĴ�С
+	 * 
 	 */
 	public int getPenSize() {
 		return mPenSize;
 	}
 
-	/**
-	 * ����״̬
-	 */
+	
 	public void resetState() {
 		setCurrentPainterType(PEN_TYPE.PLAIN_PEN);
 		setPenColor(DEFAULT.PEN_COLOR);
@@ -361,7 +356,7 @@ public class PaintView extends View implements UndoCommand {
 	}
 
 	/**
-	 * ��ı�����ɫ
+	 * 
 	 */
 	public void setBackGroundColor(int color) {
 		mBackGroundColor = color;
@@ -369,28 +364,28 @@ public class PaintView extends View implements UndoCommand {
 	}
 
 	/**
-	 * �õ�������ɫ
+	 * 
 	 */
 	public int getBackGroundColor() {
 		return mBackGroundColor;
 	}
 
 	/**
-	 * �ı仭�ʵ���ɫ���ڴ����±ʵ�ʱ�����ʹ����
+	 * 
 	 */
 	public void setPenColor(int color) {
 		mPenColor = color;
 	}
 
 	/**
-	 * �õ�penColor
+	 * 
 	 */
 	public int getPenColor() {
 		return mPenColor;
 	}
 
 	/**
-	 * ������ʱ������û�б���
+	 * 
 	 */
 	protected void setTempForeBitmap(Bitmap tempForeBitmap) {
 		if (null != tempForeBitmap) {
@@ -440,10 +435,7 @@ public class PaintView extends View implements UndoCommand {
 		return "mPaint" + mCurrentPainter + mUndoStack;
 	}
 
-	/*
-	 * ===================================�ڲ��࿪ʼ=================================
-	 * �ڲ��࣬����undo��redo
-	 */
+	
 	public class paintPadUndoStack {
 		private int m_stackSize = 0;
 		private PaintView mPaintView = null;
@@ -456,16 +448,12 @@ public class PaintView extends View implements UndoCommand {
 			m_stackSize = stackSize;
 		}
 
-		/**
-		 * ��painter����ջ��
-		 */
+	
 		public void push(ToolInterface penTool) {
 			if (null != penTool) {
-				// ���undo�Ѿ�����
+				// 
 				if (mUndoStack.size() == m_stackSize && m_stackSize > 0) {
-					// �õ���Զ�Ļ���
 					ToolInterface removedTool = mUndoStack.get(0);
-					// ���еıʼ�����
 					mOldActionStack.add(removedTool);
 					mUndoStack.remove(0);
 				}
@@ -474,18 +462,14 @@ public class PaintView extends View implements UndoCommand {
 			}
 		}
 
-		/**
-		 * �������
-		 */
+
 		public void clearAll() {
 			mRedoStack.clear();
 			mUndoStack.clear();
 			mOldActionStack.clear();
 		}
 
-		/**
-		 * undo
-		 */
+
 		public void undo() {
 			if (canUndo() && null != mPaintView) {
 				ToolInterface removedTool = mUndoStack
@@ -495,10 +479,8 @@ public class PaintView extends View implements UndoCommand {
 
 				if (null != mOrgBitMap) {
 					// Set the temporary fore bitmap to canvas.
-					// �������ļ�ʱ������һ��,����Ҫ���»��Ƴ���
 					mPaintView.setTempForeBitmap(mPaintView.mOrgBitMap);
 				} else {
-					// ��������ڣ������´���һ�ݱ���
 					mPaintView.creatCanvasBitmap(mPaintView.mBitmapWidth,
 							mPaintView.mBitmapHeight);
 				}
@@ -538,12 +520,10 @@ public class PaintView extends View implements UndoCommand {
 				}
 
 				Canvas canvas = mPaintView.mCanvas;
-				// ������ǰ�ıʼ��������removedStack��
 				// First draw the removed tools from undo stack.
 				for (ToolInterface sketchPadTool : mOldActionStack) {
 					sketchPadTool.draw(canvas);
 				}
-				// ���������Ǵӳ���������ƣ�����ֻ����ʱ�Ĵ洢
 				for (ToolInterface sketchPadTool : mUndoStack) {
 					sketchPadTool.draw(canvas);
 				}
@@ -569,6 +549,5 @@ public class PaintView extends View implements UndoCommand {
 			return "canUndo" + canUndo();
 		}
 	}
-	/* ==================================�ڲ������ ================================= */
 
 }

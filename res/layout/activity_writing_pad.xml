@@ -231,8 +231,18 @@
 	    	android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:drawableTop="@drawable/paint_setting"
+			android:drawableTop="@drawable/paint_save"
 			android:text="保存"
+			android:background="@android:color/white"
+			android:textSize="18sp"
+	    	/>
+		<Button
+	    	android:id="@+id/btnSend" 
+	    	android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:drawableTop="@drawable/paint_send"
+			android:text="发送"
 			android:background="@android:color/white"
 			android:textSize="18sp"
 	    	/>

@@ -7,7 +7,6 @@ import android.graphics.Path;
 
 
 /**
- * ����Pen�࣬�ṩPen��Ĭ��ʵ��
  */
 abstract public class PenAbstract implements ToolInterface, Shapable {
 
@@ -46,14 +45,14 @@ abstract public class PenAbstract implements ToolInterface, Shapable {
 	}
 
 	/**
-	 * ����PenColor
+	 *
 	 */
 	public void setPenColor(int color) {
 		mPenPaint.setColor(color);
 	}
 
 	/**
-	 * ������ʼλ��
+	 * 
 	 */
 	private void saveDownPoint(float x, float y) {
 		mFirstCurrentPosition.firstX = x;
@@ -72,9 +71,9 @@ abstract public class PenAbstract implements ToolInterface, Shapable {
 	@Override
 	public void touchDown(float x, float y) {
 		saveDownPoint(x, y);
-		// ÿ��down��ʱ��Ҫ��path��գ����������������
+		
 		mPath.reset();
-		// �����������
+		// 
 		mPath.moveTo(x, y);
 		savePoint(x, y);
 	}
@@ -82,7 +81,6 @@ abstract public class PenAbstract implements ToolInterface, Shapable {
 	@Override
 	public void touchMove(float x, float y) {
 		if (isMoved(x, y)) {
-			// ���������
 			drawBeziercurve(x, y);
 			savePoint(x, y);
 
@@ -101,7 +99,6 @@ abstract public class PenAbstract implements ToolInterface, Shapable {
 	}
 
 	/**
-	 * ����ǰ�ĵ㱣������
 	 */
 	private void savePoint(float x, float y) {
 		mCurrentX = x;

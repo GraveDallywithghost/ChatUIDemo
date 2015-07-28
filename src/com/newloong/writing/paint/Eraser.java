@@ -9,7 +9,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 
 public class Eraser implements ToolInterface {
-	// ֻ�е��ƶ����볬�����ֵ�Ż��ƶ�
+	
 	private static final float TOUCH_TOLERANCE = 4.0f;
 
 	private float mCurrentX = 0.0f;
@@ -26,7 +26,7 @@ public class Eraser implements ToolInterface {
 	}
 
 	private void setUp() {
-		// color�����л�Ҫ����ɫ��ģʽ������eraser
+		
 		mEraserPaint.setColor(Color.BLACK);
 		mEraserPaint.setDither(true);
 		mEraserPaint.setAntiAlias(true);
@@ -73,7 +73,7 @@ public class Eraser implements ToolInterface {
 		return mHasDraw;
 	}
 
-	// �ж��Ƿ��ƶ�
+	
 	private boolean isMoved(float x, float y) {
 		float dx = Math.abs(x - mCurrentX);
 		float dy = Math.abs(y - mCurrentX);
@@ -81,7 +81,7 @@ public class Eraser implements ToolInterface {
 		return isMoved;
 	}
 
-	// �������������
+	
 	private void drawBeziercurve(float x, float y) {
 		mPath.quadTo(mCurrentX, mCurrentY, (x + mCurrentX) / 2,
 				(y + mCurrentY) / 2);

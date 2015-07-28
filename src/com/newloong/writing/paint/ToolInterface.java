@@ -3,7 +3,6 @@ package com.newloong.writing.paint;
 
 import android.graphics.Canvas;
 
-//���л��ʶ�Ӧ��ʵ������ӿ�
 public interface ToolInterface {
 	public void draw(Canvas canvas);
 

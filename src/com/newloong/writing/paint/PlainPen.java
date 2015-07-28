@@ -3,7 +3,7 @@ package com.newloong.writing.paint;
 import android.graphics.Paint;
 
 
-//��ͨ����
+
 public class PlainPen extends PenAbstract implements ToolInterface {
 	public PlainPen(int size, int penColor) {
 		this(size,penColor,Paint.Style.STROKE);
